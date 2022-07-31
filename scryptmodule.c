@@ -13,6 +13,7 @@
 // You should have received a copy of the GNU Affero General Public License
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#define PY_SSIZE_T_CLEAN 1
 #include <Python.h>
 
 //#include "scrypt.h"
@@ -38,10 +39,10 @@ static PyObject *scrypt_getpowhash(PyObject *self, PyObject *args)
 
 static PyObject *scrypt_getpowhash(PyObject *self, PyObject *args, PyObject* kwargs) {
     char *input;
-    int      inputlen;
+    Py_ssize_t inputlen;
 
     char *outbuf;
-    size_t   outbuflen;
+    Py_ssize_t outbuflen;
 
     static char *g2_kwlist[] = {"input", NULL};
 
