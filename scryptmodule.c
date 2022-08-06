@@ -16,7 +16,7 @@
 #define PY_SSIZE_T_CLEAN 1
 #include <Python.h>
 
-//#include "scrypt.h"
+#include "scrypt.h"
 
 /*
 static PyObject *scrypt_getpowhash(PyObject *self, PyObject *args)
@@ -42,7 +42,6 @@ static PyObject *scrypt_getpowhash(PyObject *self, PyObject *args, PyObject* kwa
     Py_ssize_t inputlen;
 
     char *outbuf;
-    Py_ssize_t outbuflen;
 
     static char *g2_kwlist[] = {"input", NULL};
 
@@ -52,8 +51,6 @@ static PyObject *scrypt_getpowhash(PyObject *self, PyObject *args, PyObject* kwa
     }
 
     outbuf = PyMem_Malloc(32);
-    outbuflen = 32;
-
     Py_BEGIN_ALLOW_THREADS;
     
     scrypt_1024_1_1_256(input, outbuf);
@@ -83,11 +80,5 @@ static struct PyModuleDef scryptmodule = {
 };
 
 PyMODINIT_FUNC PyInit_ltc_scrypt(void) {
-    PyObject *m = PyModule_Create(&scryptmodule);
-
-    if (m == NULL) {
-        return NULL;
-    }
-
-    return m;
+    return PyModule_Create(&scryptmodule);
 }
